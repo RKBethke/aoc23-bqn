@@ -7,8 +7,6 @@
 # only 12 red cubes, 13 green cubes, and 14 blue cubes.
 # What is the sum of the IDs of those games?
 
-# r‿g‿b
-
 Split ← (⊢-˜+`×¬)∘=⊔⊢
 
 d ← ⟨
@@ -40,3 +38,6 @@ PossibleGame ← {𝕊g:
 
 idxs ← 0⊸≠⊸/ (1+·↕≠)⊸×(PossibleGame¨) d
 +´idxs
+
+# -- Day 2 --
+## - Part 2 -
