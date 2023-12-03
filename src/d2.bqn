@@ -20,7 +20,7 @@ d ↩ •Flines"../data/d2.txt"
 d ' '⊸≠⊸/¨↩
 
 PossibleGame ← {𝕊g:
-	g {1⊑ ':' Split 𝕩}↩
+  g {1⊑ ':' Split 𝕩}↩
   rounds ← ';' Split g
   hands ← ',' Split¨ rounds
   counts ← ('a'⊸<⊸⊔⊢)¨¨hands
@@ -37,7 +37,31 @@ PossibleGame ← {𝕊g:
 }
 
 idxs ← 0⊸≠⊸/ (1+·↕≠)⊸×(PossibleGame¨) d
-+´idxs
+•Show +´idxs
 
 # -- Day 2 --
 ## - Part 2 -
+
+# The power of a set of cubes is equal to the numbers of red, green, and blue
+# cubes multiplied together.
+# For each game, find the minimum set of cubes that must have been present.
+# What is the sum of the power of these sets?
+
+MinimumGame ← {𝕊g:
+  g {1⊑ ':' Split 𝕩}↩
+  rounds ← ';' Split g
+  hands ← ',' Split¨ rounds
+  counts ← ('a'⊸<⊸⊔⊢)¨¨hands
+
+  colors ← "red"‿"green"‿"blue"
+  ColorMask ← {𝕊𝕩:
+    color ← 3⥊1↓𝕩
+    colors ≡¨ color
+  }
+  Count ← •Bqn ⊑
+
+  hands ↩ +´¨(Count × ColorMask)¨¨counts
+  ⌈˝>hands
+}
+
+•Show +´ ×´¨ MinimumGame¨ d
