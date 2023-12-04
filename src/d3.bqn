@@ -46,6 +46,32 @@ validNumIds ← ⍷0⊸<⊸/numPos×⥊m
 # schematic?
 # gear ← '*'=d
 
-# Iterate with 3x3 window. On each point, if * and 2 distinct numbers, return gear ratio.
-# Plus reduce final array.
+# Quite ugly, but it did the trick :)
+
+GetAdjNums ← {dWin𝕊numPosWin:
+  Pad ← ⊢↑˝·≍⟜¬2+≢
+  gear ← Pad '*'=dWin
+  m ← 0≠·+´⥊¯1‿0‿1 (⌽⎉1)⌜ ¯1‿0‿1 ⌽⌜ <gear
+  res ← (Pad numPosWin) ×○⥊ m
+	unique ← ⍷·0⊸≠⊸/res
+
+	{ (≠unique)=2 ?
+    <(unique-1)⊏nums
+		; <⟨0⟩
+	}
+}
+
+winD ← ∾˝3‿3⊸↕d
+Windows ← {𝕊𝕩:
+	# Only look at windows where * is in center.
+  wins ← ∾˝3‿3⊸↕𝕩
+  mc ← {'*'=1‿1⊑𝕩}˘winD
+	mc/wins
+}
+
+adjNums ← d GetAdjNums˘○Windows (dshape⥊numPos)
++´×´¨adjNums
+
+# Answer:
+# 79844424
 
