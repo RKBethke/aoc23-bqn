@@ -24,7 +24,7 @@ ToNats ← { NN 10⊸≤⊸(¬⊸×-⊣) 𝕩-'0' }
 SplitOnChars ← ((⊢-˜¬×·+`»⊸<)∘∊˜⊔⊢)
 
 matches ← {+´ ∊´ ToNats¨ 1↓ ":|" SplitOnChars 𝕩}¨ d
-+´ 2⋆ 0⊸≤⊸/ 1-˜matches
+•Show +´ 2⋆ 0⊸≤⊸/ 1-˜matches
 
 ## - Part 2 -
 
@@ -34,3 +34,14 @@ matches ← {+´ ∊´ ToNats¨ 1↓ ":|" SplitOnChars 𝕩}¨ d
 # scratchcards are won.
 # Including the original set of scratchcards, how many total scratchcards do
 # you end up with?
+
+i ← 1+·↕≠matches
+cardGraph ← i {(≠matches)↑ (𝕨⥊0)∾1⥊˜𝕩}¨ matches
+
+prior ←¬ orig ← =˜matches
+GraphIteration ← {𝕊cards:
+	prior ↩ cards
+	orig+ > cardGraph +˝∘×⎉1‿∞ 𝕩
+}
+
+•Show +´ GraphIteration •_while_ {prior≢𝕩} orig
