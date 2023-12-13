@@ -1,6 +1,6 @@
 #!/usr/bin/env cbqn
 
-# -- Day 1 --
+# -- Day 6 --
 ## - Part 1 -
 
 # Given d, a distance, and t, the total time,
